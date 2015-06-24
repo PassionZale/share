@@ -9,11 +9,6 @@
 </head>
 <body style="margin-top:15%">
 <div style="width:300px;margin:0 auto;">
-<p>分享分享</p>
-<p>分享分享</p>
-<p>分享分享</p>
-<p>分享分享</p>
-<p>分享分享</p>
 		<div class="bdsharebuttonbox">
 		    <!--<a href="#" class="bds_more" data-cmd="more"></a>-->
 		    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
