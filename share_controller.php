@@ -11,9 +11,12 @@ class Share extends CI_Controller{
 	}
 
 	public function index(){
-		$tmp = $this->input->get();
-		var_dump($tmp);
-//		$this->load->view('share/share');
+        $this->islogin = $this->user_model->is_login();
+        if($this->islogin){
+            $this->session->set_userdata('last_activity',time());
+            $this->userdetail = $this->user_model->userDetail($this->session->userdata('user_data'));
+        }
+        $this->load->view('share/share');
 	}
 
 	public function checkLogin(){
@@ -37,9 +40,6 @@ class Share extends CI_Controller{
 		}
 		echo json_encode($ret);
 
-		//前台页面点击分享按钮后
-		//保存点击数hits
-		//update DB里面的points,即原points+hits
 	}
 	
 	public function getData(){
