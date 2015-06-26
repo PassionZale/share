@@ -11,9 +11,10 @@ if (isset($this->userdetail)) {
     }
 }
 $ip_address = $this->session->userdata['ip_address'];
-if (isset($tmp_id)) {
-    $this->huodong_model->diff_ip($tmp_id, time(), $ip_address);
-}
+//if (isset($tmp_id)) {
+//    $this->huodong_model->diff_ip($tmp_id, time(), $ip_address);
+//}
+$time = time();
 ?>
 <html>
 <head>
@@ -63,6 +64,38 @@ if (isset($tmp_id)) {
     };
     with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
 </script>
+<!--$time_ip为条件进行ajax请求share_controller-->
+<?php
+if (isset($tmp_id)) {
+    echo <<<EOF
+<script>
+(function(){
+	$.ajax({
+		type:'POST',
+		url:'/share/processData',
+		data:{
+			'userid':{$userid},
+			'time':{$time},
+			'client_ip':'{$ip_address}'
+		     },
+		dataType:'json',
+		error:function(XMLHttpRequest,textStatus,errorThrown){
+			console.log('failed');
+			console.log(XMLHttpRequest);
+			console.log(textStatus);
+			console.log(errorThrown);
+		},
+		success:function(ret){
+			console.log(ret);
+//			confirm(ret.info);  还未想到好的处理方式
+
+		}
+	});
+})();
+</script>
+EOF;
+}
+?>
 <script>
     $(function () {
         var $info_modal = $('#send_info');
